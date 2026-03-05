@@ -1,0 +1,159 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:k="clr-namespace:RestPOS.Keyboard" 
+        xmlns:RestPOS="clr-namespace:RestPOS" xmlns:local="clr-namespace:RestPOS.Sales_Register" x:Name="Payment1" x:Class="RestPOS.Sales_Register.Payment" 
+        Title="Payment" Height="622" Width="1300"  WindowStartupLocation="CenterScreen" 
+        Icon="/RestPOS;component/Res/icon2.png"  AllowsTransparency="True" WindowStyle="None" 
+         WindowState="Maximized"   Loaded="Payment1_Loaded">
+    <Grid Margin="0,0,0,0" Background="#FFF1F1F1">
+
+        <!--Top Header section  start -->
+        <Grid   Width="1180" Margin="0,15,0,0" VerticalAlignment="Top"  Background="#FFF1F1F1" Height="40">
+            <RestPOS:HomeToolbar HorizontalAlignment="Left"  VerticalAlignment="Top" Height="40" Width="1180"/>
+        </Grid>
+        <!--Top Header section  END -->
+
+        <DataGrid x:Name="dgrvSalesItemList"  IsReadOnly="True" CanUserSortColumns="False"   CanUserAddRows="False" Visibility="Hidden"  ItemsSource="{Binding}"   Margin="624,88,27,311" HeadersVisibility="Column" FontSize="18" FontFamily="Times New Roman" />
+
+
+        <TextBlock  x:Name="txtInvoice"  HorizontalAlignment="Left" Margin="35,47,0,0" FontSize="8" TextWrapping="Wrap" Text="1" VerticalAlignment="Top"/>
+
+
+        <TextBlock Text="Pay by" HorizontalAlignment="Left" Margin="30,67,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="CombPayby" HorizontalAlignment="Left" Margin="30,87,0,0" VerticalAlignment="Top" Width="278"    ToolTip="Selecciones Tipo de Pago">
+            <ComboBoxItem  Content="Efectivo" IsSelected="True"/>
+            <ComboBoxItem Content="Tarjeta Debito"/>
+            <ComboBoxItem Content="Tarjeta Crédito"/>
+            <Separator/>
+            <ComboBoxItem Content="Otros"/>
+        </ComboBox>
+
+        <TextBlock HorizontalAlignment="Left" Margin="31,116,0,0"  TextWrapping="Wrap" Text="Overall Discount Rate %: " VerticalAlignment="Top"/>
+        <TextBox x:Name="txtDiscountRate" Margin="30,137,0,0"   k:TouchScreenKeyboard.TouchScreenKeyboard="False"      FontWeight="SemiBold" ToolTip="Insert Over all Discount Rate. Discount Rate Apply with Sub total" HorizontalAlignment="Left"  Height="24"  TextWrapping="Wrap" Text="0" VerticalAlignment="Top"   Width="278" TextChanged="txtDiscountRate_TextChanged"/>
+        <TextBlock x:Name="lbloveralldiscount" HorizontalAlignment="Left" Margin="171,117,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top"/>
+
+
+        <TextBlock Text="Paid Amount" HorizontalAlignment="Left" Margin="30,165,0,0" FontWeight="SemiBold" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtPaidAmount"    HorizontalAlignment="Left" Height="28" Margin="30,184,0,0" TextWrapping="Wrap" Background="Yellow"   VerticalAlignment="Top" Width="278" TextChanged="txtPaidAmount_TextChanged" FontWeight="Bold" FontSize="14" PreviewTextInput="txtPaidAmount_PreviewTextInput" />
+
+        <TextBlock Text="Change Amount" FontWeight="SemiBold" HorizontalAlignment="Left" Margin="30,215,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtChangeAmount" HorizontalAlignment="Left" IsReadOnly="True"  Height="24" Margin="30,234,0,0"  TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="278"/>
+
+        <TextBlock Text="Due" HorizontalAlignment="Left" Margin="30,261,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtDueAmount" HorizontalAlignment="Left"  IsReadOnly="True"   Height="22" Margin="30,280,0,0"   TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="278"/>
+
+
+        <TextBlock Text="Date" HorizontalAlignment="Left" Margin="331,67,0,0" VerticalAlignment="Top"/>
+        <DatePicker x:Name="dtSalesDate" HorizontalAlignment="Left"    Margin="331,87,0,0" VerticalAlignment="Top"   Width="276"   IsTodayHighlighted="True"   FontWeight="Bold"/>
+
+
+        <TextBlock Text="Customer" HorizontalAlignment="Left" Margin="331,116,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="txtCustName" HorizontalAlignment="Left" Margin="331,137,0,0" VerticalAlignment="Top" Width="278"    SelectionChanged="txtCustName_SelectionChanged"/>
+        <TextBlock  x:Name="lblCustID" HorizontalAlignment="Left" Margin="393,116,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top"/>
+
+
+        <TextBlock Text="Select Table" HorizontalAlignment="Left" Margin="331,165,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cmboTableNo" HorizontalAlignment="Left" Margin="331,183,0,0" VerticalAlignment="Top"    Width="278">
+            <MenuItem Header="Inside Table" Background="#FF1D426E" FontWeight="Bold" Foreground="White"/>
+            <ListBoxItem x:Name="LstInT1" Content="IN-T01"/>
+            <ListBoxItem Content="IN-T02"/>
+            <ListBoxItem Content="IN-T03"/>
+            <ListBoxItem Content="IN-T04"/>
+            <ListBoxItem Content="IN-T05"/>
+            <ListBoxItem Content="IN-T06"/>
+            <ListBoxItem Content="IN-T07"/>
+            <ListBoxItem Content="IN-T08"/>
+            <ListBoxItem Content="IN-T09"/>
+            <ListBoxItem Content="IN-T10"/>
+            <MenuItem    Header="Outside Table" Background="#FF4AFF14" FontWeight="Bold" Foreground="Black"/>
+            <ListBoxItem Content="OUT-T01"/>
+            <ListBoxItem Content="OUT-T02"/>
+            <ListBoxItem Content="OUT-T03"/>
+            <ListBoxItem Content="OUT-T04"/>
+            <ListBoxItem Content="OUT-T05"/>
+            <ListBoxItem Content="OUT-T06"/>
+            <ListBoxItem Content="OUT-T07"/>
+            <ListBoxItem Content="OUT-T08"/>
+            <ListBoxItem Content="OUT-T09"/>
+            <ListBoxItem Content="OUT-T10"/>
+            <ListBoxItem Content="PARCEL"/>
+        </ComboBox>
+
+        <TextBlock Text="Comment" HorizontalAlignment="Left" Margin="331,210,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtcomment" AcceptsReturn="True"  k:TouchScreenKeyboard.TouchScreenKeyboard="False"    VerticalScrollBarVisibility="Visible"  HorizontalAlignment="Left"    Height="72" Margin="331,230,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="278"/>
+
+        <Grid HorizontalAlignment="Left" Height="210" Margin="30,315,0,0" VerticalAlignment="Top" Width="580" Background="#FFDED9D9">
+            <TextBlock x:Name="lblTotal" HorizontalAlignment="Left" Margin="385,11,0,0" TextWrapping="Wrap" Text="00" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" Foreground="#FF1D3FD8" />
+            <TextBlock x:Name="lblTotalDisCount" HorizontalAlignment="Left" Margin="385,39,0,0" TextWrapping="Wrap" Text="00" VerticalAlignment="Top" FontSize="16"/>
+            <TextBlock x:Name="lblTotalVAT" HorizontalAlignment="Left" Margin="385,104,0,0" TextWrapping="Wrap" Text="00" VerticalAlignment="Top" FontSize="16"/>
+            <Label x:Name="lblTotalItems_Copy" Content="Total Item Types" HorizontalAlignment="Left" Margin="19,177,0,0" VerticalAlignment="Top"/>
+            <TextBlock x:Name="lblTotalItems" HorizontalAlignment="Left" Margin="387,179,0,0" TextWrapping="Wrap" Text="00" VerticalAlignment="Top"/>
+            <TextBlock x:Name="lblsubtotal" HorizontalAlignment="Left" Margin="385,68,0,0" TextWrapping="Wrap" Text="00" VerticalAlignment="Top" FontSize="16"/>
+            <Label Content="Total Payable  Not use nOW " HorizontalAlignment="Left" Margin="14,143,0,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" Background="{x:Null}" Foreground="#FF293476"/>
+            <TextBlock x:Name="lblTotalPayable" HorizontalAlignment="Left" Margin="385,146,0,0" TextWrapping="Wrap" Text="00" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" Foreground="#FF293476"/>
+            <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="4" Margin="22,134,0,0" Stroke="Black" VerticalAlignment="Top" Width="544"/>
+            <TextBlock x:Name="txtVATRate" HorizontalAlignment="Left" Margin="52,109,0,0" TextWrapping="Wrap" Text="14" VerticalAlignment="Top"/>
+
+        </Grid>
+
+        <Label x:Name="lblto" Content="Total" HorizontalAlignment="Left" Margin="50,323,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" Foreground="#FF1D3FD8" Width="50"/>
+        <Label x:Name="lblto_Copy" Content="Discount" HorizontalAlignment="Left" Margin="50,351,0,0" VerticalAlignment="Top" FontSize="16" Width="78"/>
+        <Label x:Name="lblto_Copy1" Content="Tax" HorizontalAlignment="Left" Margin="50,415,0,0" VerticalAlignment="Top" FontSize="16" Width="34"/>
+        <Label x:Name="lblto_Copy2" Content="Sub Total" HorizontalAlignment="Left" Margin="50,381,0,0" VerticalAlignment="Top" FontSize="16" Width="80"/>
+
+
+        <Grid HorizontalAlignment="Left" Height="439" Margin="625,88,0,0" VerticalAlignment="Top" Width="430">
+            <TextBlock Text="Token no: " HorizontalAlignment="Left" Margin="30,22,0,0" FontWeight="SemiBold" VerticalAlignment="Top"/>
+            <TextBox HorizontalAlignment="Left" x:Name="txttokenno" Height="23"  k:TouchScreenKeyboard.TouchScreenKeyboard="False"  ToolTip="Insert customer waiting token number" Margin="127,20,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="292"/>
+            <!-- Currency Coin / Note Start-->
+            <Button Content="10"  FontSize="20" Background="White" x:Name="btnCoin1" BorderBrush="Aqua"  HorizontalAlignment="Left" Margin="30,50,0,0" VerticalAlignment="Top" Width="92" Height="46" ToolTip="One coin" Click="btnCoin1_Click"    />
+            <Button Content="20"  FontSize="20" Background="White" x:Name="btnCoin2" BorderBrush="Aqua" HorizontalAlignment="Left" Margin="30,100,0,0" VerticalAlignment="Top" Width="92" Height="46" ToolTip="Coin Two" Click="btnCoin2_Click"    />
+            <Button Content="50"  FontSize="20" Background="White" x:Name="btnNote5" BorderBrush="Aqua" HorizontalAlignment="Left" Margin="30,150,0,0" VerticalAlignment="Top" Width="92" Height="46" ToolTip="Paper Money Five " Click="btnNote5_Click"    />
+            <Button Content="100"  FontSize="20" Background="White" x:Name="btnNote10" BorderBrush="Aqua"  HorizontalAlignment="Left" Margin="30,200,0,0" VerticalAlignment="Top" Width="92" Height="46" ToolTip="Paper Money TEN " Click="btnNote10_Click"    />
+            <Button Content="200"  FontSize="20" Background="White" x:Name="btnNote20" BorderBrush="Aqua" HorizontalAlignment="Left" Margin="30,250,0,0" VerticalAlignment="Top" Width="92" Height="46"  ToolTip="Paper Money Twenty " Click="btnNote20_Click"   />
+            <Button Content="500"  FontSize="20" Background="White" x:Name="btnNote50" BorderBrush="Aqua" HorizontalAlignment="Left" Margin="30,300,0,0" VerticalAlignment="Top" Width="92" Height="46"  ToolTip="Paper Money FIFTY " Click="btnNote50_Click"   />
+            <Button Content="1000"  FontSize="20" Background="White" x:Name="btnNote100" BorderBrush="Aqua" HorizontalAlignment="Left" Margin="30,350,0,0" VerticalAlignment="Top" Width="92" Height="46" ToolTip="Paper Money 100" Click="btnNote100_Click"     />
+            <!--Currency Coin END-->
+
+            <Button Content="1"  FontSize="30" Background="#FF949EE0"  Foreground="White" x:Name="btnNum1"  HorizontalAlignment="Left" Margin="127,50,0,0" VerticalAlignment="Top" Width="92" Height="65" BorderThickness="0" ToolTip="Number One" Click="btnNum1_Click"    />
+            <Button Content="2"  FontSize="30" Background="#FF949EE0"  Foreground="White" x:Name="btnNum2"  HorizontalAlignment="Left" Margin="227,50,0,0" VerticalAlignment="Top" Width="92" Height="65" BorderThickness="0" Click="btnNum2_Click"  />
+            <Button Content="3"  FontSize="30" Background="#FF949EE0"  Foreground="White" x:Name="btnNum3"  HorizontalAlignment="Left" Margin="327,50,0,0" VerticalAlignment="Top" Width="92" Height="65" BorderThickness="0" Click="btnNum3_Click"/>
+
+            <Button Content="4"  FontSize="30" Background="#FF949EE0"  Foreground="White" x:Name="btnNum4" HorizontalAlignment="Left" Margin="127,123,0,0" VerticalAlignment="Top" Width="92" Height="65" BorderThickness="0" Click="btnNum4_Click"/>
+            <Button Content="5"  FontSize="30" Background="#FF949EE0"  Foreground="White" x:Name="btnNum5"  HorizontalAlignment="Left" Margin="227,123,0,0" VerticalAlignment="Top" Width="92" Height="65" BorderThickness="0" Click="btnNum5_Click"/>
+            <Button Content="6"  FontSize="30" Background="#FF949EE0"  Foreground="White" x:Name="btnNum6"  HorizontalAlignment="Left" Margin="327,123,0,0" VerticalAlignment="Top" Width="92" Height="65" BorderThickness="0" Click="btnNum6_Click"/>
+
+            <Button Content="7"  FontSize="30"  Background="#FF949EE0"  Foreground="White" x:Name="btnNum7"  HorizontalAlignment="Left" Margin="127,196,0,0" VerticalAlignment="Top" Width="92" Height="65" BorderThickness="0" Click="btnNum7_Click"/>
+            <Button Content="8"  FontSize="30"  Background="#FF949EE0"  Foreground="White"  x:Name="btnNum8" HorizontalAlignment="Left" Margin="227,196,0,0" VerticalAlignment="Top" Width="92" Height="65" BorderThickness="0" Click="btnNum8_Click"/>
+            <Button Content="9"  FontSize="30"  Background="#FF949EE0"  Foreground="White" x:Name="btnNum9"  HorizontalAlignment="Left" Margin="327,196,0,0" VerticalAlignment="Top" Width="92" Height="65" BorderThickness="0" Click="btnNum9_Click"/>
+
+            <Button Content="."  FontSize="30"    Background="#FF949EE0"  Foreground="White" x:Name="btnDecimal"  HorizontalAlignment="Left" Margin="127,269,0,0" VerticalAlignment="Top" Width="92" Height="65" BorderThickness="0" ToolTip="Decimal (.)" Click="btnDecimal_Click" />
+            <Button Content="0"  FontSize="30"    Background="#FF949EE0"  Foreground="White" x:Name="btnNum0"  HorizontalAlignment="Left" Margin="227,269,0,0" VerticalAlignment="Top" Width="92" Height="65" BorderThickness="0" Click="btnNum0_Click"/>
+            <Button    FontSize="30"  Background="#FF949EE0"  Foreground="White" x:Name="btnClear"   HorizontalAlignment="Left" Margin="327,269,0,0"  VerticalAlignment="Top" Width="92" Height="65" BorderThickness="0"  ToolTip="Remove Text Box" Click="btnClear_Click"   >
+                <StackPanel>
+                    <!--<Image Source="Res/ico-32-24/appbar.chevron.right.png" Height="55" Width="69"  />-->
+                    <Canvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="appbar_clear_reflect_horizontal" Width="76" Height="65" Clip="F1 M 0,0L 76,0L 76,76L 0,76L 0,0">
+                        <Path Width="40.4497" Height="28" Canvas.Left="16.5503" Canvas.Top="20" Stretch="Fill" Fill="#FFFFFF" Data="F1 M 47.5282,42.9497L 42.5784,38L 47.5282,33.0502L 44.9497,30.4718L 40,35.4216L 35.0502,30.4718L 32.4718,33.0502L 37.4216,38L 32.4718,42.9497L 35.0502,45.5282L 40,40.5784L 44.9497,45.5282L 47.5282,42.9497 Z M 18.0147,41.5355L 26.9646,50.4854C 28.0683,51.589 29,52 31,52L 52,52C 54.7614,52 57,49.7614 57,47L 57,29C 57,26.2386 54.7614,24 52,24L 31,24C 29,24 28.0683,24.4113 26.9646,25.5149L 18.0147,34.4645C 16.0621,36.4171 16.0621,39.5829 18.0147,41.5355 Z M 31,49C 30,49 29.6048,48.8828 29.086,48.3641L 20.1361,39.4142C 19.355,38.6332 19.355,37.3669 20.1361,36.5858L 29.086,27.6362C 29.6048,27.1175 30,27 31,27.0001L 52,27.0001C 53.1046,27.0001 54,27.8955 54,29.0001L 54,47.0001C 54,48.1046 53.1046,49.0001 52,49.0001L 31,49 Z "/>
+                    </Canvas>
+                </StackPanel>
+            </Button>
+
+            <Button x:Name="btnCompleteSalesAndPrint" IsDefault="True"   HorizontalAlignment="Left" Margin="327,342,0,0"     VerticalAlignment="Top" Width="92" Height="54" FontSize="15" FontWeight="Bold" Foreground="#FF07135F" BorderBrush="#FFD6B2B2" Background="#FF49E231" Click="btnPayment_Click" ToolTip="Complete Sale and Print">
+                <Canvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="appbar_printer_text" Width="76" Height="52" Clip="F1 M 0,0L 76,0L 76,76L 0,76L 0,0">
+                    <Path Width="44" Height="45" Canvas.Left="16" Canvas.Top="2" Stretch="Fill" Fill="#FFF" Data="F1 M 25,27L 25,17L 51,17L 51,27L 47,27L 47,21L 29,21L 29,27L 25,27 Z M 16,28L 60,28L 60,51L 52,51L 52,46L 55,46L 55,33L 21,33L 21,46L 24,46L 24,51L 16,51L 16,28 Z M 25,39L 28,39L 28,52L 35,52L 35,59L 48,59L 48,39L 51,39L 51,62L 33,62L 25,54L 25,39 Z M 46,55L 38,55L 38,52L 46,52L 46,55 Z M 46,49L 30,49L 30,46L 46,46L 46,49 Z M 46,43L 30,43L 30,40L 46,40L 46,43 Z "/>
+                </Canvas>
+            </Button>
+            <!-- <Button x:Name="btnSaveOnly" Content="Save" HorizontalAlignment="Left" Margin="229,342,0,0" VerticalAlignment="Top"    Width="92" Height="54" FontSize="15" FontWeight="Bold" Foreground="#FF353847" BorderBrush="#FFD6B2B2" Background="#FFB4E8AC" Click="btnSaveOnly_Click" ToolTip="Only Save "/>  -->
+            <Button x:Name="btnClose" Content="Close" HorizontalAlignment="Left" Margin="127,342,0,0" VerticalAlignment="Top"    Width="92" Height="54" FontSize="15" FontWeight="Bold" Foreground="Aqua"  BorderThickness="0"  Background="#FFE65333" Click="btnClose_Click" ToolTip="Cancel This transaction"/>
+
+
+
+        </Grid>
+
+        <TextBlock x:Name="lbluser" HorizontalAlignment="Left" Margin="30,530,0,0" TextWrapping="Wrap" FontSize="7" Text="admin" VerticalAlignment="Top"/>
+
+        <local:CurrencyShortcuts x:Name="currency_ShortcutsContorl"  HorizontalAlignment="Left" Margin="1051,141,0,0" VerticalAlignment="Top" Height="367" Width="247"/>
+
+    </Grid>
+</Window>

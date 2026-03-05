@@ -1,0 +1,26 @@
+﻿<UserControl x:Class="RestPOS.Settings.DataManager"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" Height="488" Width="Auto">
+    <Grid>
+        <Button Name="btnDataSaveas" IsDefault="True" Content="Respaldar Base de Datos " HorizontalAlignment="Left" Margin="111,53,0,0" FontSize="25" VerticalAlignment="Top" Width="379" Height="72" Click="btnDataSaveas_Click"/>
+        <TextBlock HorizontalAlignment="Left" Name="lblresettitle" Margin="600,29,0,0" TextWrapping="Wrap" Text="Limpiar Datos" FontSize="13" FontWeight="SemiBold" VerticalAlignment="Top"/>
+        <RadioButton Name="rdbtnSqlite" Content="SQLite" HorizontalAlignment="Left" Margin="700,32,0,0" IsChecked="True" VerticalAlignment="Top"/>
+        <RadioButton Name="rdbtnSQL" Content="MySQL" HorizontalAlignment="Left" Margin="772,32,0,0" VerticalAlignment="Top"/>
+        <Button Name="btnReset" Content="Truncar" HorizontalAlignment="Left" Margin="604,53,0,0" VerticalAlignment="Top" Width="323" FontSize="25" Height="72" Click="btnReset_Click"/>
+        <TextBlock HorizontalAlignment="Left" Margin="600,127,0,0" TextWrapping="Wrap" Text="Truncar ordenes, devoluciones y consecutivos " VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Name="lbltruncatedeslabel" Margin="600,147,0,0" TextWrapping="Wrap" Text="Rol de usuario Admin se conservara. " VerticalAlignment="Top"/>
+
+        <TextBlock Name="lblrestoretitle" HorizontalAlignment="Left" Margin="111,234,0,0" TextWrapping="Wrap" Text="Recuperar Base de Datos" FontSize="13" FontWeight="SemiBold" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Name="lblrestoredescription" Margin="111,252,0,0" TextWrapping="Wrap" Text="Selecciones un archivo de respaldo de la Base de Datos (.db file) Antes de importar asegurese de cerrar la base de datos." VerticalAlignment="Top"/>
+        <TextBox Name="txtfilepath" HorizontalAlignment="Left" Height="23" Margin="111,275,0,0" FontSize="9" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="351"/>
+        <Button Name="btnBrowse" Content="Browse" HorizontalAlignment="Left" Margin="472,275,0,0" VerticalAlignment="Top" Width="75" Click="btnBrowse_Click"/>
+        <Button Name="btnTruncate" Content="Importar" HorizontalAlignment="Left" Margin="111,317,0,0" VerticalAlignment="Top" Width="351" FontSize="25" Height="72" Click="btnTruncate_Click"/>
+        <Label Content="Solo BD Sqlite" HorizontalAlignment="Left" Margin="111,128,0,0" VerticalAlignment="Top"/>
+        <Label Content="Solo BD Sqlite" HorizontalAlignment="Left" Margin="110,392,0,0" VerticalAlignment="Top"/>
+
+
+    </Grid>
+</UserControl>
